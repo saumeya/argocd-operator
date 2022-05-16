@@ -382,6 +382,9 @@ func (r *ReconcileArgoCD) reconcileArgoConfigMap(cr *argoprojv1a1.ArgoCD) error 
 			}
 		}
 	}
+	if err := applyReconcilerHook(cr, cm, ""); err != nil {
+		return err
+	}
 
 	if err := controllerutil.SetControllerReference(cr, cm, r.Scheme); err != nil {
 		return err
